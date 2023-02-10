@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Edit Profile </title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header class="header-area overlay" style="background-color: #3273F5">
+    <nav class="navbar navbar-expand-md navbar-dark">
+		<div class="container">
+			<a href="#" class="navbar-brand">ABC Cars</a>
+			
+			<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#main-nav">
+				<span class="menu-icon-bar"></span>
+				<span class="menu-icon-bar"></span>
+				<span class="menu-icon-bar"></span>
+			</button>
+			<div id="main-nav" class="collapse navbar-collapse">
+				<ul class="navbar-nav ml-auto">
+					<li><a  th:href="@{/homepage}" class="nav-item nav-link active">Homepage</a></li>
+					<li><a  th:href="@{/aboutUs}" class="nav-item nav-link">About Us</a></li>
+					<li><a  th:href="@{/contactUs}" class="nav-item nav-link">Contact Us</a></li>
+					<li><a  th:href="@{/admin}" class="nav-item nav-link active">Dashboard</a></li>
+					<li><a  th:href="@{/list-cars}" class="nav-item nav-link">Cars</a></li>
+					<!-- <li><a  th:href="@{/editprofile/{id}(id=${user.id})}" class="nav-item nav-link">profile</a></li> -->
+					
+				</ul>
+				<div>
+				<form th:action="@{/logout}" method="post">
+					<input class="bg-warning" type="submit" value="Logout" />
+				</form>
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>	
+<br>
+<br>
+	<div class="container text-center">
+		<div>
+			<h1>Edit Profile Information</h1>
+		</div>
+		<form th:action="@{/admin/save}" th:object="${user}" 
+			method="post" style="max-width: 600px; margin: 0 auto;">
+			<input type="hidden" th:field="*{id}" />
+		<div class="m-3">
+			<div class="form-group row">
+				<label class="col-4 col-form-label">E-mail: </label>
+				<div class="col-8">
+					<input type="email" th:field="*{email}" class="form-control" required />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-4 col-form-label">Password: </label>
+				<div class="col-8">
+					<input type="password" th:field="*{password}" class="form-control" 
+							required minlength="6" maxlength="10"/>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-4 col-form-label">First Name: </label>
+				<div class="col-8">
+					<input type="text" th:field="*{firstName}" class="form-control" 
+							required minlength="2" maxlength="20"/>
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-4 col-form-label">Last Name: </label>
+				<div class="col-8">
+					<input type="text" th:field="*{lastName}" class="form-control" 
+							required minlength="2" maxlength="20" />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-4 col-form-label">Roles: </label>
+				<div class="col-8">
+					<th:block th:each="role: ${listRoles}">
+					<input type="checkbox" th:field="*{roles}"
+						th:text="${role.name}" th:value="${role.id}" class="m-2" />
+					</th:block>
+				</div>
+			</div>			
+			
+			<div>
+				<button type="submit" class="btn btn-primary">Update</button> 
+			</div>
+		</div>
+		</form>
+	</div>
+	<div th:insert="footer" ::foot></div>
+</body>
+</html>

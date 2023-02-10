@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+	crossorigin="anonymous">
+<link href="css/home.css" rel="stylesheet">
+<link href="css/header.css" rel="stylesheet">
+</head>
+
+<body>
+<div th:insert="fragment/header::menubar"></div>
+<br>
+<br>
+<br>
+<div class="container text-center">
+		<div class="col-12">
+            <form action="adminsearch" method="get"
+									class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex" style="width:400px">
+									<input type="text" class="form-control me-2"
+										placeholder="Search..." aria-label="Search" name="searchValue"
+										id="searchValue" required />
+									
+									<button class="btn btn-outline-secondary" type="submit" style="margin-left:5px">
+                Search
+              </button>
+								</form>
+		<div class="col-md-auto">
+		
+            <form
+              class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex"
+              action="adminsearch-price"
+              method="get"
+              id="searchPrice"
+            >
+            
+              <input
+                 class="form-control me-2"
+                type="search"
+                name="min"
+                placeholder="Search Min Price"
+                aria-label="Search"
+              />
+
+              <input
+                class="form-control me-2"
+                type="search"
+                name="max"
+                placeholder="Search Max Price"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-secondary" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+          <hr>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">image</th>
+						<th scope="col">Manufacture by</th>
+						<th scope="col">Model</th>
+						<th scope="col">Years</th>
+						<th scope="col">price</th>
+						<th scope="col">Status</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${products}">
+					
+						<th scope="row"><img alt="" th:src="*{'data:image/jpeg;base64,'+{product.image}}" style="width: 100px;height: 100px;"></th>
+						<td>[[*{product.make}]] 
+						
+							
+						</td>
+						<td>[[*{product.model}]] <!-- Button trigger modal -->
+							<br>
+						</td>
+						<td>[[*{product.years}]] <!-- Button trigger modal -->
+							<br>
+						</td>
+						<td>[[*{product.price}]] 
+						<!-- Button trigger modal --> <br>
+						</td>
+						
+						<td>[[*{product.status}]] 
+						<!-- Button trigger modal --> <br>
+						</td>
+						<td>
+						<a th:href="@{/cars/edit/{id}(id=${product.id})}"
+							class="btn btn-danger mt-4">Edit</a>	
+						
+						<a th:href="@{/deleteProd/{id}(id=${product.id})}"
+							class="btn btn-danger mt-4">delete</a>
+						</td>
+						</tr>
+					
+				</tbody>
+			</table>
+			<hr>
+		</div>
+		</div>
+<div th:insert="footer" ::foot></div>
+</body>
+</html>

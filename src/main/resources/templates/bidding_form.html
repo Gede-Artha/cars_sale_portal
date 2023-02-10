@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Bidding Form </title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <div th:insert="fragment/navbaruser::navbar"></div>
+<br>
+<br>
+<br>
+	<div class="container text-center">
+		<div>
+			<h1>Add youre Bidding Prize Request</h1>
+		</div>
+		<form th:action="@{/biddingNow}"  th:object="${entitycarbid}"
+			method="post" style="max-width: 600px; margin: 0 auto;">
+			
+		<div class="m-3">
+			<div class="form-group row">
+				<label class="col-4 col-form-label">Email: </label>
+				<div class="col-8">
+					<input type="email" th:field="*{username}" class="form-control" placeholder="input you're email account" required />
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-4 col-form-label">Car Reg.no: </label>
+				<div class="col-8">
+					<input type="text" th:field="*{car_regNum}"  placeholder="Cars Registration number" class="form-control" 
+							/>
+				</div>
+			</div>
+			
+			
+			<div class="form-group row">
+				<label class="col-4 col-form-label">Bidding: </label>
+				<div class="col-8">
+					<input type="text" th:field="*{comments}" class="form-control" 
+							required placeholder="add youre comments for bidding" style="height :100px" />
+				</div>
+			</div>
+	
+			<div>
+				<button type="submit" class="btn btn-primary">Sent Request</button> 
+			</div>
+		</div>
+		</form>
+	</div>
+	<div th:insert="footer" ::foot></div>
+</body>
+</html>
